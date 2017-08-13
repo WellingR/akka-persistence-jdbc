@@ -8,9 +8,8 @@ import sbt._
 import scalariform.formatter.preferences.FormattingPreferences
 
 object ProjectAutoPlugin extends AutoPlugin {
-  final val AkkaVersion = "2.5.2"
-  final val SlickVersion = "3.2.0"
-  final val HikariCPVersion = "2.5.1"
+  final val AkkaVersion = "2.5.4"
+  final val SlickVersion = "3.2.1"
   final val ScalaTestVersion = "3.0.3"
 
   final val formattingPreferences: FormattingPreferences = {
@@ -37,9 +36,9 @@ object ProjectAutoPlugin extends AutoPlugin {
 
     licenses += ("Apache-2.0", url("http://opensource.org/licenses/apache2.0.php")),
 
-    scalaVersion := "2.12.2",
+    scalaVersion := "2.12.3",
 
-    crossScalaVersions := Seq("2.11.11", "2.12.2"),
+    crossScalaVersions := Seq("2.11.11", "2.12.3"),
 
     fork in Test := true,
 
