@@ -14,27 +14,26 @@
  * limitations under the License.
  */
 
-package akka.persistence.jdbc.util
+package akka.persistence.jdbc
+package util
 
-import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 import com.typesafe.config.{Config, ConfigFactory}
 
-import scala.concurrent.duration.{Duration, FiniteDuration}
-import scala.language.implicitConversions
+import scala.concurrent.duration.FiniteDuration
 import scala.util.Try
 
-object ConfigOps {
+private[jdbc] object ConfigOps {
   implicit class ConfigOperations(val config: Config) extends AnyVal {
-    def as[A](key: String): Try[A] =
-      Try(config.getAnyRef(key)).map(_.asInstanceOf[A])
+    def as[A](key: String): Option[A] =
+      Try(config.getAnyRef(key)).map(_.asInstanceOf[A]).toOption
 
     def as[A](key: String, default: A): A =
       Try(config.getAnyRef(key)).map(_.asInstanceOf[A])
         .getOrElse(default)
 
-    def asConfig(key: String, default: Config = ConfigFactory.empty) =
+    def asConfig(key: String, default: Config = ConfigFactory.empty): Config =
       Try(config.getConfig(key))
         .getOrElse(default)
 
@@ -42,40 +41,20 @@ object ConfigOps {
       Try(config.getInt(key))
         .getOrElse(default)
 
-    def asBoolean(key: String, default: Boolean) =
+    def asBoolean(key: String, default: Boolean): Boolean =
       Try(config.getBoolean(key))
         .getOrElse(default)
 
-    def asFiniteDuration(key: String, default: FiniteDuration) =
+    def asFiniteDuration(key: String, default: FiniteDuration): FiniteDuration =
       Try(FiniteDuration(config.getDuration(key).toMillis, TimeUnit.MILLISECONDS))
         .getOrElse(default)
-
-    def asDuration(key: String): Duration =
-      config.getString(key).toLowerCase(Locale.ROOT) match {
-        case "off" => Duration.Undefined
-        case _     => config.getMillisDuration(key) requiring (_ > Duration.Zero, key + " >0s, or off")
-      }
-
-    def getMillisDuration(key: String): FiniteDuration = getDuration(key, TimeUnit.MILLISECONDS)
-
-    def getNanosDuration(key: String): FiniteDuration = getDuration(key, TimeUnit.NANOSECONDS)
-
-    def getDuration(key: String, unit: TimeUnit): FiniteDuration = Duration(config.getDuration(key, unit), unit)
-
-    def ?[A](key: String): Try[A] = as(key)
-
-    def ?:[A](key: String, default: A) = as(key, default)
-
-    def withkey[A](key: String)(f: Config => A): A = f(config.getConfig(key))
   }
-
-  implicit def TryToOption[A](t: Try[A]): Option[A] = t.toOption
 
   final implicit class TryOps[A](val t: Try[A]) extends AnyVal {
     def ?:(default: A): A = t.getOrElse(default)
   }
 
-  final implicit class StringTryOps(val t: Try[String]) extends AnyVal {
+  final implicit class StringOptOps(val t: Option[String]) extends AnyVal {
     /**
      * Trim the String content, when empty, return None
      */

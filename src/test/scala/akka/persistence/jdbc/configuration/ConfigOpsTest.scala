@@ -35,11 +35,11 @@ class ConfigOpsTest extends SimpleSpec with MaterializerSpec {
       """.stripMargin
     )
 
-    cfg.as[String]("person.firstName").success.value shouldBe "foo"
-    cfg.as[String]("person.lastName").success.value shouldBe "bar"
-    cfg.as[Int]("person.age").success.value shouldBe 25
-    cfg.as[Boolean]("person.hasCar").success.value shouldBe true
-    cfg.as[Boolean]("person.hasGirlfriend").success.value shouldBe false
+    cfg.as[String]("person.firstName") shouldBe Some("foo")
+    cfg.as[String]("person.lastName") shouldBe Some("bar")
+    cfg.as[Int]("person.age") shouldBe Some(25)
+    cfg.as[Boolean]("person.hasCar") shouldBe Some(true)
+    cfg.as[Boolean]("person.hasGirlfriend") shouldBe Some(false)
   }
 
   it should "parse field values with default values with empty config" in {

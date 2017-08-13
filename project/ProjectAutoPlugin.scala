@@ -29,8 +29,8 @@ object ProjectAutoPlugin extends AutoPlugin {
 
   override val projectSettings: Seq[Setting[_]] = SbtScalariform.scalariformSettings ++ Seq(
     name := "akka-persistence-jdbc",
-    organization := "com.github.dnvriend",
-    organizationName := "Dennis Vriend",
+    organization := "com.github.wellingr",
+    organizationName := "Ruud Welling",
     description := "A plugin for storing events in an event journal akka-persistence-jdbc",
     startYear := Some(2014),
 
@@ -53,8 +53,6 @@ object ProjectAutoPlugin extends AutoPlugin {
       "-feature",
       "-unchecked",
       "-Xlog-reflective-calls",
-      "-language:higherKinds",
-      "-language:implicitConversions",
       "-target:jvm-1.8"
     ),
 
@@ -65,8 +63,8 @@ object ProjectAutoPlugin extends AutoPlugin {
     testOptions in Test += Tests.Argument("-oDF"),
 
     headers := headers.value ++ Map(
-      "scala" -> Apache2_0("2017", "Dennis Vriend"),
-      "conf" -> Apache2_0("2017", "Dennis Vriend", "#")
+      "scala" -> Apache2_0("2017", "Dennis Vriend and Ruud Welling"),
+      "conf" -> Apache2_0("2017", "Dennis Vriend and Ruud Welling", "#")
     ),
 
     resolvers += Resolver.typesafeRepo("releases"),
