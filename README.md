@@ -277,6 +277,7 @@ sys.addShutdownHook(system.terminate())
 ## Changelog
 ## 3.0.0 (TO BE RELEASED)
   - Forked from [dnvriend-akka-persistence-jdbc]
+  - EventsByTag query treats the offset as exclusive instead of inclusive. **This is a breaking change!**
   - Increased major version number, the akka 2.4 version will get a different artifact id.
   - Fixed bug in eventsByTag and currentEventsByTag query, which could case some event to be skipped
   - Implemented batch writing for the journal which results in better thoughput.
