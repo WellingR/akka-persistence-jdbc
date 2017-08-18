@@ -21,7 +21,7 @@ addSbtPlugin("org.foundweekends" % "sbt-bintray" % "0.5.1")
 addSbtPlugin("org.scalariform" % "sbt-scalariform" % "1.6.0")
 
 // enable updating file headers eg. for copyright
-addSbtPlugin("de.heikoseeberger" % "sbt-header" % "1.8.0")
+addSbtPlugin("de.heikoseeberger" % "sbt-header" % "3.0.1")
 
 // enable release process
 // https://github.com/sbt/sbt-release

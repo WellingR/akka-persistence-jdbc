@@ -1,7 +1,6 @@
 import com.typesafe.sbt.SbtScalariform
 import com.typesafe.sbt.SbtScalariform.ScalariformKeys
-import de.heikoseeberger.sbtheader.HeaderKey._
-import de.heikoseeberger.sbtheader.license.Apache2_0
+import de.heikoseeberger.sbtheader.HeaderPlugin.autoImport._
 import sbt.Keys._
 import sbt._
 
@@ -62,10 +61,12 @@ object ProjectAutoPlugin extends AutoPlugin {
     // show full stack traces and test case durations
     testOptions in Test += Tests.Argument("-oDF"),
 
-    headers := headers.value ++ Map(
-      "scala" -> Apache2_0("2017", "Dennis Vriend and Ruud Welling"),
-      "conf" -> Apache2_0("2017", "Dennis Vriend and Ruud Welling", "#")
-    ),
+    headerLicense := Some(HeaderLicense.ALv2("2016", "Dennis Vriend and Ruud Welling")),
+
+//    headers := headers.value ++ Map(
+//      "scala" -> ALv2("2017", "Dennis Vriend and Ruud Welling"),
+//      "conf" -> ALv2("2017", "Dennis Vriend and Ruud Welling", "#")
+//    ),
 
     resolvers += Resolver.typesafeRepo("releases"),
     resolvers += Resolver.jcenterRepo,
