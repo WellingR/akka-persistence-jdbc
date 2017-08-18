@@ -15,11 +15,8 @@ Add the following to your `build.sbt`:
 // the library is available in Bintray's JCenter
 resolvers += Resolver.jcenterRepo
 
-// akka 2.5.x (not yet available)
+// akka 2.5.x
 libraryDependencies += "com.github.wellingr" %% "akka-persistence-jdbc" % "3.0.0"
-
-// akka 2.4.x (not yet available)
-libraryDependencies += "com.github.wellingr" %% "akka-persistence-jdbc-akka24" % "3.0.0"
 ```
 
 ## Contribution policy
@@ -278,10 +275,12 @@ sys.addShutdownHook(system.terminate())
 ## 3.0.0 (TO BE RELEASED)
   - Forked from [dnvriend-akka-persistence-jdbc]
   - EventsByTag query treats the offset as exclusive instead of inclusive. **This is a breaking change!**
-  - Increased major version number, the akka 2.4 version will get a different artifact id.
+  - Increased major version number.
   - Fixed bug in eventsByTag and currentEventsByTag query, which could case some event to be skipped
   - Implemented batch writing for the journal which results in better thoughput.
   - Fixed a potential issue where actors could retrieve their latest sequence number too early upon restart.
+  - Akka 2.5.2 -> 2.5.4
+  - Slick 3.2.0 -> 3.2.1
 
 ## 2.4.18.2 (2017-06-09)
   - Fixed Issue #106 'JdbcReadJournal in javadsl does not support CurrentEventsByTagQuery2 and EventsByTagQuery2'

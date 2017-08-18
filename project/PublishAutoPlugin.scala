@@ -15,6 +15,7 @@ object PublishAutoPlugin extends AutoPlugin {
 
  override lazy val projectSettings = Seq(
     publishMavenStyle := true,
+    bintrayReleaseOnPublish in ThisBuild := false,
     scmInfoSetting("akka-persistence-jdbc"),
     pomExtraSetting("akka-persistence-jdbc"),
     homepageSetting("akka-persistence-jdbc"),
